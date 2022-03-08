@@ -207,6 +207,7 @@ class ParallelAnalysisBase(object):
             :meth:`pmda.parallel.ParallelAnalysisBase._single_frame`.
 
         """
+        self._uni = universe.copy()
         self._trajectory = universe.trajectory
         self._top = universe.filename
         self._traj = universe.trajectory.filename
@@ -418,7 +419,8 @@ class ParallelAnalysisBase(object):
         wait_end = time.time()
         # record time to generate universe and atom groups
         with timeit() as b_universe:
-            u = mda.Universe(top, traj)
+            #u = mda.Universe(top, traj)
+            u = self._uni
             agroups = [u.atoms[idx] for idx in indices]
 
         res = []
